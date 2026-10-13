@@ -90,5 +90,5 @@ require __DIR__ . '/includes/header.php';
         <?php endif; ?>
     </section>
 </main>
-
+<?php require __DIR__ . '/includes/floating-nav.php'; ?>
 <?php require __DIR__ . '/includes/footer.php'; ?>
