@@ -1,3 +1,863 @@
-:root{--primary:#8f1010;--primary-dark:#4f0808;--accent:#ff9d00;--text:#241313;--muted:#7d6666;--border:#e5c9bd;--bg:#160d0d;--card:#241414;--success:#35c878;--danger:#ff5d5d}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#f8eeee;background:var(--bg)}a{color:inherit}.site-header{background:linear-gradient(135deg,#8f1010,#4f0808);color:#fff;border-bottom:2px solid var(--accent)}.header-inner,.main-container,.footer-inner{width:min(1050px,calc(100% - 32px));margin:0 auto}.header-inner{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-size:1.25rem;font-weight:700}.brand-mark{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:9px;background:var(--accent);color:#4f0808;font-weight:900}.main-nav{display:flex;gap:18px}.main-nav a{color:#fff;text-decoration:none;font-weight:700}.main-nav a:hover{color:var(--accent)}.main-container{padding:34px 0 48px}.page-heading{margin:0 0 8px;font-size:2rem}.page-subtitle{margin:0 0 22px;color:#cdb8b8}.search-box{margin-bottom:26px;padding:18px;border:1px solid #5e3838;border-radius:14px;background:#211010}.search-form{display:grid;grid-template-columns:1fr 180px 180px auto;gap:10px}.form-control{width:100%;min-height:44px;padding:10px 12px;border:1px solid #704747;border-radius:9px;background:#160d0d;color:#fff;font-size:1rem}.form-control:focus{outline:2px solid var(--accent);border-color:var(--accent)}.search-note{margin:10px 0 0;color:#a98f8f;font-size:.92rem}.btn{display:inline-block;padding:11px 20px;border:0;border-radius:9px;background:var(--accent);color:#321000;font-weight:800;cursor:pointer}.btn:hover{background:#ffb52e}.film-list{display:flex;flex-direction:column;gap:14px}.film-card{display:flex;gap:20px;padding:14px;border:1px solid #5b3434;border-radius:14px;background:var(--card);box-shadow:0 8px 22px rgba(0,0,0,.25);transition:.2s}.film-card:hover{border-color:var(--accent);transform:translateY(-2px)}.film-poster{width:130px;height:190px;flex:0 0 130px;object-fit:cover;object-position: center;display: block;border-radius:9px;border:1px solid #704747;background:#100707}.film-body{flex:1;padding:4px 4px 4px 0}.film-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.film-name{margin:0;font-size:1.35rem;color:#fff}.film-period{margin:8px 0 12px;color:var(--accent);font-weight:700}.film-summary{margin:0 0 16px;max-width:760px;color:#cdbaba;line-height:1.6}.film-meta{display:flex;gap:8px;flex-wrap:wrap}.badge{display:inline-block;padding:6px 10px;border-radius:999px;font-size:.82rem;font-weight:800}.badge-showing{background:#263f2e;color:#65e39a}.badge-period{background:#3c2525;color:#e8c0a0}.badge-ticket{background:#263f2e;color:#65e39a}.badge-price{background:#3f2b0f;color:#ffc35a}.badge-soldout{background:#4b2020;color:#ff8a8a}.empty-state{padding:34px;border:1px dashed #704747;border-radius:14px;text-align:center;background:#211010;color:#bda8a8}.site-footer{border-top:1px solid #4c2d2d;background:#100909}.footer-inner{padding:22px 0;text-align:center;color:#927c7c;font-size:.92rem}@media(max-width:850px){.search-form{grid-template-columns:1fr 1fr auto}.search-form .form-control:first-child{grid-column:1/-1}}@media(max-width:700px){.search-form{grid-template-columns:1fr}.search-form .form-control:first-child{grid-column:auto}.film-card{align-items:flex-start}.film-poster{width:105px;height:155px;flex-basis:105px}.film-title-row{align-items:flex-start;flex-direction:column}.film-name{font-size:1.15rem}}@media(max-width:480px){.header-inner{align-items:flex-start;flex-direction:column;padding:14px 0}.main-nav{padding-bottom:6px}.film-card{gap:12px}.film-poster{width:90px;height:135px;flex-basis:90px}}
-.hero{padding:34px;border-radius:18px;color:#fff;background:linear-gradient(135deg,#8f1010,#3c0707);border:1px solid #713333}.hero h1{margin:0 0 10px;font-size:clamp(2rem,5vw,3.4rem)}.hero p{max-width:720px;margin:0 0 22px;color:#eadcdc;line-height:1.6}
+:root {
+    --primary: #8f1010;
+    --primary-dark: #4f0808;
+    --accent: #ff9d00;
+    --text: #241313;
+    --muted: #7d6666;
+    --border: #e5c9bd;
+    --bg: #160d0d;
+    --card: #241414;
+    --success: #35c878;
+    --danger: #ff5d5d
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #f8eeee;
+    background: var(--bg)
+}
+
+a {
+    color: inherit
+}
+
+.site-header {
+    background: linear-gradient(135deg, #8f1010, #4f0808);
+    color: #fff;
+    border-bottom: 2px solid var(--accent)
+}
+
+.header-inner,
+.main-container,
+.footer-inner {
+    width: min(1050px, calc(100% - 32px));
+    margin: 0 auto
+}
+
+.header-inner {
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 700
+}
+
+.brand-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    background: var(--accent);
+    color: #4f0808;
+    font-weight: 900
+}
+
+.main-nav {
+    display: flex;
+    gap: 18px
+}
+
+.main-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700
+}
+
+.main-nav a:hover {
+    color: var(--accent)
+}
+
+.main-container {
+    padding: 34px 0 48px
+}
+
+.page-heading {
+    margin: 0 0 8px;
+    font-size: 2rem
+}
+
+.page-subtitle {
+    margin: 0 0 22px;
+    color: #cdb8b8
+}
+
+.search-box {
+    margin-bottom: 26px;
+    padding: 18px;
+    border: 1px solid #5e3838;
+    border-radius: 14px;
+    background: #211010
+}
+
+.search-form {
+    display: grid;
+    grid-template-columns: 1fr 180px 180px auto;
+    gap: 10px
+}
+
+.form-control {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #704747;
+    border-radius: 9px;
+    font: inherit;
+    background: #160d0d;
+    color: #fff;
+    font-size: 1rem
+}
+
+.form-control:focus {
+    outline: 2px solid var(--accent);
+    border-color: var(--accent)
+}
+
+.search-note {
+    margin: 10px 0 0;
+    color: #a98f8f;
+    font-size: .92rem
+}
+
+button, input, select, textarea {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #321000;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-decoration: none;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: #fff;
+}
+.btn-danger:hover {
+    background: #e04848;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.card-actions .inline-form {
+    margin: 0;
+    display: inline-block;
+}
+
+.btn-small { padding: 8px 11px; border-radius: 8px; font-size: .88rem; }
+
+.btn:hover {
+    background: #ffb52e
+}
+
+.film-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px
+}
+
+.film-card {
+    display: flex;
+    gap: 20px;
+    padding: 14px;
+    border: 1px solid #5b3434;
+    border-radius: 14px;
+    background: var(--card);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .25);
+    transition: .2s
+}
+
+.film-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px)
+}
+
+.film-poster {
+    width: 130px;
+    height: 190px;
+    flex: 0 0 130px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-radius: 9px;
+    border: 1px solid #704747;
+    background: #100707
+}
+
+.film-body {
+    flex: 1;
+    padding: 4px 4px 4px 0
+}
+
+.film-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px
+}
+
+.film-name {
+    margin: 0;
+    font-size: 1.35rem;
+    color: #fff
+}
+
+.film-period {
+    margin: 8px 0 12px;
+    color: var(--accent);
+    font-weight: 700
+}
+
+.film-summary {
+    margin: 0 0 16px;
+    max-width: 760px;
+    color: #cdbaba;
+    line-height: 1.6
+}
+
+.film-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+
+.badge-showing {
+    background: #263f2e;
+    color: #65e39a
+}
+
+.badge-period {
+    background: #3c2525;
+    color: #e8c0a0
+}
+
+.badge-ticket {
+    background: #263f2e;
+    color: #65e39a
+}
+
+.badge-price {
+    background: #3f2b0f;
+    color: #ffc35a
+}
+
+.badge-soldout {
+    background: #4b2020;
+    color: #ff8a8a
+}
+
+.empty-state {
+    padding: 34px;
+    border: 1px dashed #704747;
+    border-radius: 14px;
+    text-align: center;
+    background: #211010;
+    color: #bda8a8
+}
+
+.site-footer {
+    border-top: 1px solid #4c2d2d;
+    background: #100909
+}
+
+.footer-inner {
+    padding: 22px 0;
+    text-align: center;
+    color: #927c7c;
+    font-size: .92rem
+}
+
+@media(max-width:850px) {
+    .search-form {
+        grid-template-columns: 1fr 1fr auto
+    }
+
+    .search-form .form-control:first-child {
+        grid-column: 1/-1
+    }
+}
+
+@media(max-width:700px) {
+    .search-form {
+        grid-template-columns: 1fr
+    }
+
+    .search-form .form-control:first-child {
+        grid-column: auto
+    }
+
+    .film-card {
+        align-items: flex-start
+    }
+
+    .film-poster {
+        width: 105px;
+        height: 155px;
+        flex-basis: 105px
+    }
+
+    .film-title-row {
+        align-items: flex-start;
+        flex-direction: column
+    }
+
+    .film-name {
+        font-size: 1.15rem
+    }
+}
+
+@media(max-width:480px) {
+    .header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0
+    }
+
+    .main-nav {
+        padding-bottom: 6px
+    }
+
+    .film-card {
+        gap: 12px
+    }
+
+    .film-poster {
+        width: 90px;
+        height: 135px;
+        flex-basis: 90px
+    }
+}
+
+.hero {
+    padding: 34px;
+    border-radius: 18px;
+    color: #fff;
+    background: linear-gradient(135deg, #8f1010, #3c0707);
+    border: 1px solid #713333
+}
+
+.hero h1 {
+    margin: 0 0 10px;
+    font-size: clamp(2rem, 5vw, 3.4rem)
+}
+
+.hero p {
+    max-width: 720px;
+    margin: 0 0 22px;
+    color: #eadcdc;
+    line-height: 1.6
+}
+
+.btn-secondary {
+    background: #4a3030;
+    color: #fff;
+    border: 1px solid #805858;
+    text-decoration: none
+}
+
+.btn-secondary:hover {
+    background: #684141;
+    color: #fff
+}
+
+.page-actions,
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 16px
+}
+
+.page-actions form {
+    margin: 0
+}
+
+.form-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(240px, 1fr);
+    gap: 20px;
+    align-items: start
+}
+
+.form-card,
+.info-card {
+    padding: 22px;
+    border: 1px solid #5b3434;
+    border-radius: 14px;
+    background: var(--card);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .2)
+}
+
+.info-card {
+    margin-bottom: 16px;
+    color: #d8c5c5;
+    line-height: 1.6
+}
+
+.info-card h2 {
+    margin: 0 0 12px;
+    color: #fff;
+    font-size: 1.15rem
+}
+
+.info-card ul {
+    padding-left: 20px;
+    margin: 0
+}
+
+.form-group {
+    margin-bottom: 17px
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 700;
+    color: #f8eeee
+}
+
+.form-group textarea.form-control {
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.5
+}
+
+.required {
+    color: var(--accent)
+}
+
+.field-error {
+    margin: 6px 0 0;
+    color: #ff8a8a;
+    font-size: .9rem
+}
+
+.alert {
+    padding: 12px 15px;
+    border-radius: 9px;
+    margin: 0 0 18px;
+    line-height: 1.45
+}
+
+.alert-success {
+    background: #183927;
+    border: 1px solid #2f8050;
+    color: #8af0b1
+}
+
+.alert-error {
+    background: #4b2020;
+    border: 1px solid #8b3939;
+    color: #ffaaaa
+}
+
+.hero-note {
+    margin-top: 16px !important;
+    margin-bottom: 0 !important;
+    font-size: .92rem;
+    color: #e2caca !important
+}
+.inline-form { display: inline; margin: 0; }
+
+.film-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.film-count {
+    font-size: 1.2rem;
+    color: #cdb8b8;
+    margin: 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+/* Thanh mục lục tháng & nút Hôm Nay cố định */
+.schedule-nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #1e0e0e;
+    border-bottom: 2px solid var(--accent);
+    padding: 12px 0;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.nav-bar-inner {
+    width: min(1050px, calc(100% - 32px));
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.month-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.month-btn {
+    padding: 6px 14px;
+    background: #2f1717;
+    border: 1px solid #6b3e3e;
+    border-radius: 8px;
+    color: #f0dede;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.month-btn:hover {
+    background: var(--accent);
+    color: #321000;
+    border-color: var(--accent);
+}
+
+.btn-jump-today {
+    padding: 7px 18px;
+    background: var(--accent);
+    color: #321000;
+    font-weight: 800;
+    border-radius: 999px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 0 10px rgba(255, 157, 0, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.toc-box {
+    background: var(--card, #241414);
+    border: 1px solid #5e3838;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px 0 32px;
+    max-width: 480px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #4a2828;
+    padding-bottom: 8px;
+}
+
+.toc-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--accent, #ff9d00);
+    margin: 0;
+}
+
+.toc-list {
+    margin: 12px 0 0;
+    padding-left: 22px;
+    color: #e5c9bd;
+    line-height: 1.75;
+    font-size: 0.95rem;
+}
+
+.toc-sublist {
+    padding-left: 20px;
+    margin: 4px 0;
+}
+
+.toc-list a {
+    color: #f5e6e6;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.toc-list a:hover {
+    color: var(--accent, #ff9d00);
+    text-decoration: underline;
+}
+
+/* 2. CÁC NÚT BẤM ẨN / HIỆN (COLLAPSIBLE TOGGLE) */
+.collapse-toggle-btn {
+    background: transparent;
+    border: 1px solid #6b3e3e;
+    color: #cdb8b8;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.collapse-toggle-btn:hover {
+    background: var(--accent, #ff9d00);
+    color: #321000;
+    border-color: var(--accent, #ff9d00);
+}
+
+/* 3. HUY HIỆU ĐÁNH DẤU (BADGES) */
+.badge-tag {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.4px;
+}
+
+.badge-tag.tag-year {
+    background: #ff5d5d;
+    color: #ffffff;
+}
+
+.badge-tag.tag-month {
+    background: #35c878;
+    color: #0c2b18;
+}
+
+.badge-tag.tag-today {
+    background: var(--accent, #ff9d00);
+    color: #321000;
+}
+
+/* 4. KHỐI NĂM (YEAR SECTION) */
+.schedule-year-block {
+    margin-bottom: 40px;
+}
+
+.schedule-year-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--primary, #8f1010);
+    padding-bottom: 8px;
+    margin: 30px 0 20px;
+}
+
+.schedule-year-title {
+    font-size: 1.85rem;
+    color: var(--accent, #ff9d00);
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* 5. KHỐI THÁNG (MONTH SECTION) */
+.schedule-month-block {
+    margin-left: 8px;
+    margin-bottom: 28px;
+}
+
+.schedule-month-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2a1212;
+    padding: 10px 16px;
+    border-left: 4px solid var(--accent, #ff9d00);
+    border-radius: 6px;
+    margin-bottom: 16px;
+}
+
+.schedule-month-title {
+    font-size: 1.25rem;
+    color: #ffffff;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* 6. KHỐI NGÀY (DAY CARD) */
+.schedule-day-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.schedule-day-card {
+    background: var(--card, #241414);
+    border: 1px solid #4d2828;
+    border-radius: 10px;
+    padding: 14px 18px;
+    transition: border-color 0.2s;
+}
+
+.schedule-day-card.is-today {
+    border: 2px solid var(--accent, #ff9d00);
+    box-shadow: 0 0 14px rgba(255, 157, 0, 0.25);
+}
+
+.schedule-day-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px dashed #442020;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.schedule-day-title {
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 1.05rem;
+}
+
+/* 7. DANH SÁCH POSTER PHIM */
+.schedule-poster-grid {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.schedule-poster {
+    width: 74px;
+    height: 108px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1.5px solid #5e3838;
+    cursor: pointer;
+    background: #110505;
+    transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.schedule-poster:hover {
+    transform: scale(1.08);
+    border-color: var(--accent, #ff9d00);
+    box-shadow: 0 4px 12px rgba(255, 157, 0, 0.4);
+}
+
+.schedule-empty {
+    color: #7d6666;
+    font-size: 0.88rem;
+    font-style: italic;
+}
+
+/* 8. NÚT NỔI ĐIỀU HƯỚNG GÓC PHẢI (FLOATING NAV) */
+.floating-nav {
+    position: fixed;
+    bottom: 26px;
+    right: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 999;
+}
+
+.floating-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s;
+}
+
+.floating-btn:hover {
+    transform: scale(1.1);
+}
+
+.floating-btn.btn-today {
+    background: var(--accent, #ff9d00);
+    color: #321000;
+    border-color: #ffffff;
+    font-size: 13px;
+}
+
+.floating-btn.btn-top {
+    background: #2a1111;
+    color: var(--accent, #ff9d00);
+    border-color: #6b3e3e;
+    font-size: 18px;
+}
+
+/* 9. ĐIỂM DỪNG TẢI DỮ LIỆU KHI CUỘN (SCROLL SENTINEL) */
+.scroll-sentinel {
+    padding: 30px 0;
+    text-align: center;
+    color: #7d6666;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+@media(max-width:760px) {
+    .form-layout {
+        grid-template-columns: 1fr
+    }
+
+    .form-card,
+    .info-card {
+        padding: 17px
+    }
+}

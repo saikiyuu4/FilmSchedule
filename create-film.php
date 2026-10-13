@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/includes/functions.php';
+require_once __DIR__ . '/config/database.php';
 
 $pageTitle = 'Thêm phim - FilmSchedule';
 
@@ -24,18 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['name'] = 'Vui lòng nhập tên phim.';
     } elseif (mb_strlen($name, 'UTF-8') < 2) {
         $errors['name'] = 'Tên phim phải có ít nhất 2 ký tự.';
-    }
-
-    if ($start === '') {
-        $errors['start'] = 'Vui lòng chọn ngày bắt đầu chiếu.';
-    } elseif (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $start)) {
-        $errors['start'] = 'Ngày bắt đầu không hợp lệ.';
-    }
-
-    if ($end === '') {
-        $errors['end'] = 'Vui lòng chọn ngày kết thúc chiếu.';
-    } elseif (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $end)) {
-        $errors['end'] = 'Ngày kết thúc không hợp lệ.';
     }
 
     if ($start !== '' && $end !== '' && $end < $start) {
@@ -65,7 +54,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        $isSuccess = true;
+        $stmt = $pdo->prepare('INSERT INTO films (name, start_date, end_date, tickets, min_price, max_price, poster, summary) VALUES (:name, :start_date, :end_date, 0, :min_price, :max_price, :poster, :summary)');
+        $stmt->execute([
+            'name' => $name,
+            'start_date' => $start,
+            'end_date' => $end,
+            'min_price' => (int)$minPrice,
+            'max_price' => (int)$maxPrice,
+            'poster' => 'assets/posters/dune.jpg',
+            'summary' => $description,
+        ]);
+        header('Location: film.php?created=1');
+        exit;
     }
 }
 
@@ -82,7 +82,7 @@ require __DIR__ . '/includes/header.php';
                 <div class="alert alert-success">Dữ liệu hợp lệ.</div>
             <?php endif; ?>
 
-            <form method="POST" action="create-product.php" novalidate>
+            <form method="POST" action="create-film.php" novalidate>
                 <div class="form-group">
                     <label for="name">Tên phim <span class="required">*</span></label>
                     <input class="form-control" id="name" name="name" type="text"
@@ -121,8 +121,8 @@ require __DIR__ . '/includes/header.php';
                 </div>
 
                 <div class="form-actions">
-                    <button class="btn" type="submit">Kiểm tra dữ liệu</button>
-                    <a class="btn btn-secondary" href="products.php">Quay lại lịch chiếu</a>
+                    <button class="btn" type="submit">Thêm Phim</button>
+                    <a class="btn btn-secondary" href="film.php">Quay lại lịch chiếu</a>
                 </div>
             </form>
         </section>
